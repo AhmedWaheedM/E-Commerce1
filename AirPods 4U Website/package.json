@@ -1,5 +1,5 @@
 {
-    "name": "discord-webhook-proxy",
+    "name": "discord-webhook",
     "version": "1.0.0",
     "description": "A proxy server for sending data to Discord webhook",
     "main": "server.js",
