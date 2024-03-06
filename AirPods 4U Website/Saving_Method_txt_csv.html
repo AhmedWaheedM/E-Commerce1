@@ -1,0 +1,107 @@
+
+
+
+
+<!--el code dah bta3 el downloading lel responses we bysht8l bas mehtag yt3mlo implementation m3 el code bta3na-->
+
+
+
+<html>
+<head>
+<title>What did I do today?</title>
+</head>
+<body>
+
+<form onsubmit="saveResponses()">
+
+<h3>My name is...</h3>
+<textarea rows=2 cols=25 name="text"></textarea>
+<br><br>
+
+Please select the appropriate response.
+<table width="660" border>
+    <tr align="center">
+        <td width="500"></td>
+        <td width="50">1</td>
+        <td width="50">2</td>
+        <td width="50">3</td>
+        <td width="50">4</td>
+    </tr>
+    <tr align="center">
+        <td width="500">I brushed my teeth today.</td>
+        <td><input type="checkbox" value="1"></td>
+        <td><input type="checkbox" value="2"></td>
+        <td><input type="checkbox" value="3"></td>
+        <td><input type="checkbox" value="4"></td>
+    </tr>
+    <tr align="center">
+        <td width="500">I washed my hands today.</td>
+        <td><input type="checkbox" value="1"></td>
+        <td><input type="checkbox" value="2"></td>
+        <td><input type="checkbox" value="3"></td>
+        <td><input type="checkbox" value="4"></td>
+    </tr>
+    <tr align="center">
+        <td width="500">I ate all of my vegetables today.</td>
+        <td><input type="checkbox" value="1"></td>
+        <td><input type="checkbox" value="2"></td>
+        <td><input type="checkbox" value="3"></td>
+        <td><input type="checkbox" value="4"></td>
+    </tr>
+    <tr align="center">
+        <td width="500">I fed the fish this week.</td>
+        <td><input type="checkbox" value="1"></td>
+        <td><input type="checkbox" value="2"></td>
+        <td><input type="checkbox" value="3"></td>
+        <td><input type="checkbox" value="4"></td>
+    </tr>
+</table>
+<br>
+<input type="submit" value="SAVE">
+</form>
+
+<script type="text/javascript">
+    // StackOverflow question https://stackoverflow.com/questions/65084239
+    function saveResponses() {
+      // Windows-safe filename
+      var name = document.getElementsByTagName('textarea')[0].value.replace(/[<>:"/\|?*]/g, ' ') + '.csv';
+
+      var responses = [];
+      var questions = document.getElementsByTagName('tr');
+      for (var i = 1; i < questions.length; i++) {
+        var question = questions[i].getElementsByTagName('td')[0].innerHTML;
+
+        // Save responses in CSV format
+        responses.push('"' + question + '"');
+        var checkboxes = questions[i].querySelectorAll('input[type=checkbox]:checked');
+        for (var j = 0; j < checkboxes.length; j++) {
+          responses[responses.length - 1] += ',"' + checkboxes[j].value + '"';
+        }
+      }
+      responses = responses.join('\r\n');
+      // console.log(responses);
+      download(responses, name, 'text/csv');
+    }
+
+    // Borrowed from https://stackoverflow.com/a/30832210
+    function download(data, filename, type) {
+        var file = new Blob([data], {type: type});
+        if (window.navigator.msSaveOrOpenBlob) { // IE10+
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        } else { // Others
+            var a = document.createElement('a');
+            var url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+</script>
+
+</body>
+</html>

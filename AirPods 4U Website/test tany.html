@@ -1,0 +1,191 @@
+
+
+
+
+<!-- dah code el checkout el 3ady we sha8al dah kan mashy be nazry el webhook el fashlt 0_0 -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+// Get references to elements
+const productAmountInput = document.getElementById('product-amount');
+const minusButton = document.getElementsByClassName('reduce');
+const plusButton = document.getElementsByClassName('add');
+
+// Increment product quantity
+function incrementProductAmount() {
+  let currentAmount = parseInt(document.getElementById('product-amount').textContent);
+  if (currentAmount < 10) {
+    currentAmount++;
+    document.getElementById('product-amount').textContent = currentAmount;
+  }
+}
+// decrement product quantity 
+function decrementProductAmount() {
+  let currentAmount = parseInt(document.getElementById('product-amount').textContent);
+  if (currentAmount > 1) {
+    currentAmount--;
+    document.getElementById('product-amount').textContent = currentAmount;
+  }
+}
+
+    //test el functionality 
+    function test()
+    {
+        console.log("zeby");
+    };
+    // submitting function
+    function submitForm(event) {
+      event.preventDefault();
+
+      // Get form data
+      const email = document.querySelector('input[name="email"]').value;
+      const phone = document.querySelector('input[name="phone"]').value;
+      const name = document.querySelector('input[name="name"]').value;
+      const address = document.querySelector('input[name="address"]').value;
+      const city = document.querySelector('input[name="city"]').value;
+      const coupon = document.querySelector('input[name="coupon"]').value;
+      const amount = document.getElementById('product-amount').textContent;
+      const price = 150*amount; 
+      const finalprice = 150*amount;
+
+      // Send data to Discord bot "el mafrod" P.S. argok eftker 8ayar el function mn testsend le sendDataToDiscord ya waheed
+      testsend(email,  phone,  name,  address,  city,  coupon,  price,  finalprice,  amount);
+      const formContainer = document.querySelector('.form-section');
+  formContainer.innerHTML = `
+    <h2>Thank you for your order!</h2>
+    <p>Your order details have been submitted.</p>
+    `;
+
+    }
+
+    //testing be el console
+    function testsend(email,  phone,  name, address, city,  coupon, price, finalprice,  amount){
+      if (coupon === 'summer10'){
+        finalprice = finalprice - (finalprice * 0.1);
+      }
+      else 
+      {
+        finalprice = price;
+      }
+      console.log(email,  phone,  name, address, city, coupon, price, finalprice, amount)
+
+    }
+
+    //sending el data le discord
+    
+
+   
+    
+  </script>
+    
+    
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,
+  maximum-scale=5"
+    />
+
+    <link rel="icon" href="./img/devchallenges.png" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://devchallenges.io/" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <title>страница за доставка</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="head-text">ПОРЪЧКАТА</h1>
+      </header>
+      <main class="main">
+        <!-- form section -->
+        <section class="form-section">
+          <form class="form-area">
+            <h2 class="contact-info-text">Информация за връзка</h2>
+            <div class="contact-info">
+              <div class="email-area postal-area">
+                <label for="email" class="email label">електронна поща</label>
+                <div class="input-area">
+                  <span class="material-icons"> email </span>
+                  <input type="email" name="email" placeholder="Въведете своя имейл..." />
+                </div>
+              </div>  
+              <div class="phone-area postal-area">
+                <label for="phone" class="phone label">Телефон</label>
+                <div class="input-area">
+                  <span class="material-icons"> phone </span>
+                  <input type="text" name="phone" placeholder="Въведете телефона си..." />
+                </div>
+              </div>
+            </div>
+          </form>
+          <form class="form-area">
+            <h2 class="shipping-info-text">Адрес за доставка</h2>
+            <div class="shipping-info">
+              <div class="name-area postal-area">
+                <label for="name" class="name label">Пълно име</label>
+                <div class="input-area">
+                  <span class="material-icons"> account_circle </span>
+                  <input type="text" name="name" placeholder="Вашето пълно име.." />
+                </div>
+              </div>
+              <div class="address-area postal-area">
+                <label for="address" class="address label">Офис на еконт/Адрес</label>
+                <div class="input-area">
+                  <span class="material-icons"> home </span>
+                  <input type="text" name="address" placeholder=" Вашият адрес .." />
+                </div>
+              </div>
+              <div class="city-area postal-area">
+                <label for="city" class="city label">град</label>
+                <div class="input-area">
+                  <span class="material-icons"> location_city </span>
+                  <input type="text" name="city" placeholder="твоят град.." />
+                </div>
+              </div>
+              <div class="coupon-area">
+                <label for="coupon" class="coupon label">Купон</label>
+                <div class="input-area">
+                  <span class="material-icons"> discount </span>
+                  <input type="text" name="coupon" placeholder="Моля, въведете своя купон.." />
+                </div>
+
+              
+              
+                
+              </div>
+              
+            </div>
+           
+            
+          </form>
+         
+            <div class="quantity-buttons add-reduce-item">
+              <button class="reduce" type="button" onclick="decrementProductAmount()">–</button>
+              <span id="product-amount" name="product-amount">1</span>
+              <button class="add" type="button" onclick="incrementProductAmount()">+</button>
+            </div>
+          
+            </form>
+          
+            </form>
+
+             <div class="btn-area">
+              <button class = "yarab" type="button" onclick="submitForm(event)">продължавам</button>
+            </div>
+        </section>
+        
+       
+  </body>
+</html>

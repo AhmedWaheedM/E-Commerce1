@@ -1,0 +1,14 @@
+{
+    "name": "discord-webhook-proxy",
+    "version": "1.0.0",
+    "description": "A proxy server for sending data to Discord webhook",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "axios": "^0.26.1",
+      "body-parser": "^1.19.2",
+      "express": "^4.17.3"
+    }
+  }
